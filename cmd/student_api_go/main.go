@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"log/slog"
 	"net/http"
@@ -12,6 +11,7 @@ import (
 	"time"
 
 	"github.com/JagdeepSingh13/student_api_go/internal/config"
+	"github.com/JagdeepSingh13/student_api_go/internal/http/handlers/student"
 )
 
 func main() {
@@ -23,9 +23,7 @@ func main() {
 	// setup router
 	router := http.NewServeMux()
 
-	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome to student api in Golang"))
-	})
+	router.HandleFunc("POST /api/students", student.New())
 
 	// setup server
 	server := http.Server{
@@ -34,8 +32,8 @@ func main() {
 	}
 
 	slog.Info("Server Started:", slog.String("address", cfg.Addr))
-	fmt.Printf("Server Started: %s", cfg.HTTPServer.Addr)
 
+	// just to make server shutdown graceful
 	done := make(chan os.Signal, 1)
 
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
