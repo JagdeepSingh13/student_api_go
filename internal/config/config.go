@@ -1,5 +1,8 @@
 package config
 
+// go run .\cmd\student_api_go\main.go -config config/local.yaml
+// this config path is req.
+
 import (
 	"flag"
 	"log"
@@ -9,7 +12,7 @@ import (
 )
 
 type HTTPServer struct {
-	Addr string
+	Addr string `yaml:"address" env-required:"true"`
 }
 
 //  env-default:"production"
