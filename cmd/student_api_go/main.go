@@ -33,6 +33,8 @@ func main() {
 	// so that we can pass this storage, made func CreateStudent in sqlite
 	router.HandleFunc("POST /api/students", student.New(storage))
 
+	router.HandleFunc("GET /api/students/{id}", student.GetById(storage))
+
 	// setup server
 	server := http.Server{
 		Addr:    cfg.Addr,
