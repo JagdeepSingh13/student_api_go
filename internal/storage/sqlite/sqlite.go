@@ -38,7 +38,7 @@ func New(cfg *config.Config) (*Sqlite, error) {
 	}, nil
 }
 
-// to implement storage.Storage in this
+// to implement storage.Storage in this we make fn. with same name
 func (s *Sqlite) CreateStudent(name string, email string, age int) (int64, error) {
 	stmt, err := s.Db.Prepare("INSERT INTO students (name, email, age) VALUES (?, ?, ?)")
 	if err != nil {

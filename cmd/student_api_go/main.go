@@ -30,7 +30,7 @@ func main() {
 	// setup router
 	router := http.NewServeMux()
 
-	// so that we can pass this storage made func CreateStudent
+	// so that we can pass this storage, made func CreateStudent in sqlite
 	router.HandleFunc("POST /api/students", student.New(storage))
 
 	// setup server
